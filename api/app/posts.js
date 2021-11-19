@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const Posts = await Post.find({}).populate('Users', 'username');
+    const Posts = await Post.find().populate('userId', 'username');
     res.send(Posts);
   } catch (e) {
     res.sendStatus(500);
