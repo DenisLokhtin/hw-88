@@ -1,7 +1,7 @@
 .toolbar {
     display: flex;
     justify-content: space-between;
-    margin: 20px 10%;
+    margin: 10px 10%;
 }
 
 .header a {

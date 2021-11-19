@@ -1,9 +1,8 @@
 import React from 'react';
 import UserMenu from "../Menu/UserMenu/UserMenu";
-
-import './Toolbar.css'
 import AnonymousMenu from "../Menu/AnonymousMenu/AnonymousMenu";
 import {Link} from "react-router-dom";
+import './Toolbar.css'
 
 const Toolbar = () => {
     return (
