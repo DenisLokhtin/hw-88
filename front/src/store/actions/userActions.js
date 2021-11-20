@@ -24,6 +24,7 @@ export const registerUser = userData => {
             dispatch(registerUserSuccess(response.data));
             dispatch(historyPush('/'));
         } catch (error) {
+            console.log(error)
             if (error.response && error.response.data) {
                 dispatch(registerUserFailure(error.response.data));
             } else {
@@ -38,10 +39,11 @@ export const loginUser = userData => {
         try {
             dispatch(loginUserRequest());
             const response = await axiosApi.post('/users/sessions', userData);
-            dispatch(loginUserSuccess(response.data.user));
+            console.log(response.data)
+            dispatch(loginUserSuccess(response.data.username));
             dispatch(historyPush('/'));
-            toast.success('Login successful');
         } catch (error) {
+            console.log(error)
             if (error.response && error.response.data) {
                 dispatch(loginUserFailure(error.response.data));
             } else {

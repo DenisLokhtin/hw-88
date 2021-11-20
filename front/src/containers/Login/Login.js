@@ -1,14 +1,35 @@
-import React from 'react';
-import './Login.css'
+import React, {useState} from 'react';
+import {useDispatch} from "react-redux";
+import {loginUser} from "../../store/actions/userActions";
+import './Login.css';
 
 const Login = () => {
+    const dispatch = useDispatch();
+
+    const [user, setUser] = useState({
+        username: '',
+        password: ''
+    });
+
+    const inputChangeHandler = e => {
+        const {name, value} = e.target;
+
+        setUser(prevState => ({...prevState, [name]: value}));
+        console.log(user)
+    };
+
+    const submitFormHandler = e => {
+        e.preventDefault();
+        dispatch(loginUser({...user}));
+    };
+
     return (
         <div>
             <form className="authorization">
                 <h2>Login</h2>
-                <input type="text" placeholder="Username"/>
-                <input type="password" placeholder="Password"/>
-                <button>Send</button>
+                <input name="username" value={user.username} onChange={e => (inputChangeHandler(e))} type="text" placeholder="Username"/>
+                <input name="password" value={user.password} onChange={e => (inputChangeHandler(e))} type="password" placeholder="Password"/>
+                <button onSubmit={submitFormHandler}>Send</button>
             </form>
         </div>
     );

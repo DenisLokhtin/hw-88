@@ -1,3 +1,4 @@
+const config = require('../config');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -6,9 +7,12 @@ const Post = require('../models/Post');
 const auth = require("../middleware/auth");
 
 const storage = multer.diskStorage({
-  filename: (req, file, cb) => {
-    cb(null, nanoid() + path.extname(file.originalname));
-  }
+  destination: (req, image, cb) => {
+    cb(null, config.uploadPath);
+  },
+  filename: (req, image, cb) => {
+    cb(null, nanoid() + path.extname(image.originalname));
+  },
 });
 
 const upload = multer({storage});
@@ -39,7 +43,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
   if (!req.body.title || !req.body.userId || !req.body.date) {
     return res.status(400).send({error: 'Invalid data'});
   }
@@ -51,7 +55,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   };
 
   if (req.file) {
-    PostData.image = 'uploads/' + req.file.filename;
+    PostData.file = req.file.filename;
   }
 
   if (req.body.description) {

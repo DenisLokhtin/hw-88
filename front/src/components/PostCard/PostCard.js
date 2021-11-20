@@ -18,8 +18,8 @@ const PostCard = (props) => {
                 <img src={image()} alt="img"/>
             </div>
             <div className="postCardInfo">
-                <p><span>date</span> by <span>user</span></p>
-                <p><span className="link">Read post > > ></span></p>
+                <p><span>{props.date}</span> by <span>{props.username}</span></p>
+                <p><span className="link">{props.title}</span></p>
             </div>
         </div>
     );
