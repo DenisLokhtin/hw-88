@@ -6,7 +6,7 @@ const PostCard = (props) => {
 
     const image = () => {
         if (props.image) {
-            return props.image
+            return 'http://localhost:8000/public/uploads/' + props.image
         } else {
             return texts
         }
